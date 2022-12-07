@@ -6,6 +6,7 @@
 // https://stackoverflow.com/a/42817956/1123955
 // https://github.com/motdotla/dotenv/issues/89#issuecomment-587753552
 import 'dotenv/config.js'
+import request from 'request'
 
 import {
   Contact,
@@ -16,6 +17,8 @@ import {
 }                  from 'wechaty'
 
 import qrcodeTerminal from 'qrcode-terminal'
+
+const { post } = request
 
 function onScan (qrcode: string, status: ScanStatus) {
   if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
@@ -42,10 +45,25 @@ function onLogout (user: Contact) {
 
 async function onMessage (msg: Message) {
   log.info('StarterBot', msg)
+  if (msg.text() === '') {
+    return
+  }
 
-  // if (msg.text() === 'ding') {
-  //   await msg.say('dong')
-  // }
+  const options = {
+    body: {
+      q: msg.text(),
+    },
+    json: true,
+    url: 'http://128.1.0.105:5000/api',
+  }
+  post(options, async (err, res, body) => {
+    if (err) {
+      await msg.say(err)
+    }
+    if (body['a'] !== '') {
+      await msg.say(body['a'])
+    }
+  })
 }
 
 const bot = WechatyBuilder.build({
@@ -70,10 +88,11 @@ const bot = WechatyBuilder.build({
    *   for using more powerful protocol.
    * Learn more about services (and TOKEN) from https://wechaty.js.org/docs/puppet-services/
    */
-  puppet: 'wechaty-puppet-service',
-  puppetOptions: {
-    token: 'xxx',
-  },
+  // puppet: 'wechaty-puppet-wechat',
+  // puppetOptions: {
+  //   endpoint: '128.1.0.102:8788',
+  //   token: '05528844-cf42-4fa8-80c3-2615d4c2d590',
+  // },
 })
 
 bot.on('scan',    onScan)
