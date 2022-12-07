@@ -41,11 +41,11 @@ function onLogout (user: Contact) {
 }
 
 async function onMessage (msg: Message) {
-  log.info('StarterBot', msg.toString())
+  log.info('StarterBot', msg)
 
-  if (msg.text() === 'ding') {
-    await msg.say('dong')
-  }
+  // if (msg.text() === 'ding') {
+  //   await msg.say('dong')
+  // }
 }
 
 const bot = WechatyBuilder.build({
@@ -70,10 +70,10 @@ const bot = WechatyBuilder.build({
    *   for using more powerful protocol.
    * Learn more about services (and TOKEN) from https://wechaty.js.org/docs/puppet-services/
    */
-  // puppet: 'wechaty-puppet-service'
-  // puppetOptions: {
-  //   token: 'xxx',
-  // }
+  puppet: 'wechaty-puppet-service',
+  puppetOptions: {
+    token: 'xxx',
+  },
 })
 
 bot.on('scan',    onScan)
