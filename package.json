@@ -55,5 +55,10 @@
     "is-pr": "^2.0.0",
     "wechaty-puppet-mock": "^1.18.2"
   },
-  "__npminstall_done": false
+  "__npminstall_done": false,
+  "git": {
+    "scripts": {
+      "pre-push": "npx git-scripts-pre-push"
+    }
+  }
 }

@@ -48,21 +48,31 @@ async function onMessage (msg: Message) {
   if (msg.text() === '') {
     return
   }
+  log.info(msg.room()); 
+  let q = msg.text()
+  if(q.length < 5) {
+  	return 
+  }
+
+  log.info('q = %s', msg.text() )
 
   const options = {
     body: {
       q: msg.text(),
     },
     json: true,
-    url: 'http://128.1.0.105:5000/api',
+    timeout: 60000, 
+    url: 'http://127.0.0.1:5000/api',
   }
   post(options, async (err, res, body) => {
-    if (err) {
-      await msg.say(err)
-    }
-    if (body['a'] !== '') {
-      await msg.say(body['a'])
-    }
+      if (err) {
+  	log.error('%s', err)
+	  return 
+      }
+      log.info('a = %s', body.data.a)
+      if(body.data.a!== '') {
+          await msg.say(body.data.a)
+       }
   })
 }
 
