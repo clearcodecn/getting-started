@@ -58,7 +58,6 @@
   "__npminstall_done": false,
   "git": {
     "scripts": {
-      "pre-push": "npx git-scripts-pre-push"
     }
   }
 }
