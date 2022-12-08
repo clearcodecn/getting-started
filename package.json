@@ -54,10 +54,5 @@
     "check-node-version": "^4.2.1",
     "is-pr": "^2.0.0",
     "wechaty-puppet-mock": "^1.18.2"
-  },
-  "__npminstall_done": false,
-  "git": {
-    "scripts": {
-    }
   }
 }

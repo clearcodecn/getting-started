@@ -48,6 +48,9 @@ async function onMessage (msg: Message) {
   if (msg.text() === '') {
     return
   }
+  if(msg.text().indexOf('请问') === -1 && msg.text().indexOf('帮我') === -1) {
+  	return 
+  }
   log.info(msg.room()); 
   let q = msg.text()
   if(q.length < 5) {
