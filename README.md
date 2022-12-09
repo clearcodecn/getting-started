@@ -28,4 +28,4 @@ npm run start
 
 依赖chatgpt: 
 
-git@github.com:clearcodecn/chatgpt.git
+[git@github.com:clearcodecn/chatgpt.git](https://github.com/clearcodecn/chatgpt)
